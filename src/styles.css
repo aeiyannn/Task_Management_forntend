@@ -1,0 +1,13 @@
+/* Login.css */
+
+.bg-container {
+  min-height: 100vh; /* Minimum height of the viewport */
+  background-image: url("../src/Image/background.png"); /* Path to your image */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  /* Additional styles as needed */
+}
+body {
+  margin: 0;
+  padding: 0;
+}
