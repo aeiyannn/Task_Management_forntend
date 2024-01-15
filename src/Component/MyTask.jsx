@@ -4,6 +4,7 @@ import { HiFlag } from "react-icons/hi";
 import { RiDeleteBin5Line } from "react-icons/ri";
 import Modal from "./Model";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function MyTask() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,12 +16,48 @@ export default function MyTask() {
     setIsModalOpen(true);
     setModeldata(v);
   };
-  useEffect(() => {
 
+  const updateStatus = (e, v) => {
+    console.log(e.target.value)
+    v.taskStatus = e.target.value
+    let data = {
+      "taskStatus": e.target.value
+    };
+
+    let config = {
+      method: 'put',
+      maxBodyLength: Infinity,
+      url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/updatestatus/${v.id}`,
+      headers: {
+        'Authorization': userData.token,
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios.request(config)
+      .then((response) => {
+        console.log(response.data)
+        toast.success("status update", {
+          theme: "dark",
+          autoClose: "2000",
+          hideProgressBar: true
+        })
+        reload()
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  useEffect(() => {
+    reload()
+
+  }, [])
+  const reload = () => {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `http://localhost:2000/api/mytask/${userData.id}`,
+      url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/mytask/${userData.id}`,
       headers: {
         'Authorization': userData.token
       }
@@ -35,8 +72,7 @@ export default function MyTask() {
       .catch((error) => {
         console.log(error);
       });
-
-  }, [])
+  }
 
   return (
     <div>
@@ -70,7 +106,7 @@ export default function MyTask() {
                 task?.map((v, i) => {
                   return (
                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <th scope="row" className="px-6 py-4  text-blue-500 font-bold ">
+                      <th onClick={() => OpenModel(v)} scope="row" className="px-6 py-4  text-blue-500 font-bold ">
                         {v.taskTitle}
                       </th>
                       <td
@@ -112,7 +148,17 @@ export default function MyTask() {
                       </td>
                       <td className="pl-4 py-3">
                         <div className="relative inline-block">
-                          <select className="appearance-none text-center text-xs bg-yellow-400 w-20 rounded-sm border-2 px-2 focus:outline-none">
+                          <select onChange={(e) => updateStatus(e, v)} className={`appearance-none text-center text-white text-xs rounded-sm border-2 px-2 focus:outline-none ${v.taskStatus === "pending"
+                            ? "bg-orange-400"
+                            : v.taskStatus === "started"
+                              ? "bg-blue-500"
+                              : v.taskStatus === "onprogress"
+                                ? "bg-yellow-500"
+                                : v.taskStatus === "completed"
+                                  ? "bg-green-500"
+
+                                  : "bg-red-500"
+                            }`}>
                             <option
                               className="text-lg p-4 border"
                               value=""
@@ -123,32 +169,33 @@ export default function MyTask() {
                               {v.taskStatus}
                             </option>
                             <option
-                              className=" p-4 bg-white border hover:hidden"
-                              value="role1"
+                              className=" p-4 bg-orange-500 border hover:hidden"
+                              value="pending" label="Pending"
                             >
                               Pending
                             </option>
                             <option
-                              className="  p-4 bg-white border hover:hidden"
-                              value="role2"
+                              className="  p-4 bg-blue-500 border hover:hidden"
+                              value="started" label="Started"
                             >
                               Started
                             </option>
                             <option
-                              className="p-4 bg-white border hover:bg-white"
-                              value="role3"
+                              className="p-4 bg-yellow-500 border hover:bg-white"
+                              value="onprogress" label="On progress"
                             >
                               On progress
                             </option>
                             <option
-                              className="p-4 bg-white border hover:bg-white"
-                              value="role3"
+                              className="p-4 bg-green-500 border hover:bg-white"
+                              value="completed" label="Completed"
                             >
                               Completed
                             </option>
                             <option
-                              className="p-4 bg-white border hover:bg-white"
-                              value="role3"
+                              className="p-4 bg-red-500 border hover:bg-white"
+                              value="notcomplete"
+                              label="Not complete"
                             >
                               Not complete
                             </option>
@@ -170,6 +217,7 @@ export default function MyTask() {
 
       <div></div>
       <Modal isOpen={isModalOpen} onClose={setIsModalOpen} Data={ModelData} />
+      <ToastContainer />
     </div >
   );
 }

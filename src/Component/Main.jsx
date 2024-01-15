@@ -9,12 +9,12 @@ import booklogo from "../Image/book.png";
 import MyTask from "./MyTask";
 import CreateTask from "./CreateTask";
 import { useNavigate } from "react-router";
+import AllTask from "./AllTask";
 
 const Main = () => {
   const [open, setOpen] = useState(true);
-  const [content, Setcontent] = useState("createtask");
+  const [content, Setcontent] = useState("myTask");
   const getrole = localStorage.getItem("userinfo")
-  const Navigate = useNavigate()
   const role = JSON.parse(getrole)
   console.log(getrole)
 
@@ -117,7 +117,10 @@ const Main = () => {
             {
 
               content === "myTask" ?
-                <MyTask />
+                role.userType === "admin" ?
+                  <AllTask />
+                  :
+                  <MyTask />
                 :
                 <CreateTask />
             }
