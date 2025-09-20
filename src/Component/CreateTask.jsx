@@ -33,7 +33,7 @@ const CreateTask = () => {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: 'https://taskmanagementbackend-production-7a9f.up.railway.app/api/getallusers',
+      url: 'https://taskbackend-seven.vercel.app//api/getallusers',
       headers: {
         'Authorization': admindata?.token,
         'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ const CreateTask = () => {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/addtask/${selectedAssignee.value}`,
+      url: `https://taskbackend-seven.vercel.app//api/addtask/${selectedAssignee.value}`,
       headers: {
         'Authorization': admindata.token,
         'Content-Type': 'application/json'

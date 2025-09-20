@@ -31,7 +31,7 @@ export default function AllTask() {
         let config = {
             method: 'put',
             maxBodyLength: Infinity,
-            url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/updatestatus/${v.id}`,
+            url: `https://taskbackend-seven.vercel.app//api/updatestatus/${v.id}`,
             headers: {
                 'Authorization': adminData.token,
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ export default function AllTask() {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: 'https://taskmanagementbackend-production-7a9f.up.railway.app/api/getalltask',
+            url: 'https://taskbackend-seven.vercel.app//api/getalltask',
             headers: {
                 'Authorization': adminData.token
             }

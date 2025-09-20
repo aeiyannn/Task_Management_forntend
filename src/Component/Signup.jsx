@@ -40,7 +40,7 @@ export default function Signup() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://taskmanagementbackend-production-7a9f.up.railway.app/api/auth/signup',
+      url: 'https://taskbackend-seven.vercel.app//api/auth/signup',
       headers: {
         'Content-Type': 'application/json'
       },

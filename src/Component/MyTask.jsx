@@ -27,7 +27,7 @@ export default function MyTask() {
     let config = {
       method: 'put',
       maxBodyLength: Infinity,
-      url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/updatestatus/${v.id}`,
+      url: `https://taskbackend-seven.vercel.app//api/updatestatus/${v.id}`,
       headers: {
         'Authorization': userData.token,
         'Content-Type': 'application/json'
@@ -57,7 +57,7 @@ export default function MyTask() {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `https://taskmanagementbackend-production-7a9f.up.railway.app/api/mytask/${userData.id}`,
+      url: `https://taskbackend-seven.vercel.app//api/mytask/${userData.id}`,
       headers: {
         'Authorization': userData.token
       }
