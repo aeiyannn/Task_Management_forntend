@@ -1,70 +1,129 @@
-# Getting Started with Create React App
+# Taska – Task Management Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern task management web application built with React. Taska allows teams to create, assign, and track tasks with role-based access for admins and regular users.
+
+## Features
+
+- **Authentication** – Secure login and signup with JWT-based sessions stored in `localStorage`
+- **Role-based Access**
+  - **Admin** – Can create tasks, assign them to team members, and view all tasks
+  - **User / Manager** – Can view and update the status of tasks assigned to them
+- **Task Management**
+  - Create tasks with a title, description, due date, priority, and status
+  - Assign tasks to specific team members
+  - Update task status (Pending, Started, On Progress, Completed, Not Complete)
+  - View task details in a modal
+- **Priority Levels** – Low, Normal, High (color-coded with flag icons)
+- **Responsive UI** – Collapsible sidebar, works on mobile and desktop
+- **Toast Notifications** – Real-time feedback for all user actions
+
+## Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| [React 18](https://reactjs.org/) | UI library |
+| [React Router v6](https://reactrouter.com/) | Client-side routing |
+| [Tailwind CSS](https://tailwindcss.com/) | Utility-first styling |
+| [React Hook Form](https://react-hook-form.com/) | Form state management |
+| [Yup](https://github.com/jquense/yup) | Schema-based form validation |
+| [Axios](https://axios-http.com/) | HTTP client for API calls |
+| [React Select](https://react-select.com/) | Dropdown/select components |
+| [React Toastify](https://fkhadra.github.io/react-toastify/) | Toast notifications |
+| [React Icons](https://react-icons.github.io/react-icons/) | Icon library |
+
+## Project Structure
+
+```
+src/
+├── Component/
+│   ├── Login.jsx          # Login page
+│   ├── Signup.jsx         # Signup page
+│   ├── Main.jsx           # Main layout with sidebar (post-login)
+│   ├── AllTask.jsx        # Admin view – all tasks
+│   ├── MyTask.jsx         # User view – assigned tasks
+│   ├── CreateTask.jsx     # Admin form to create & assign tasks
+│   ├── Model.jsx          # Task detail modal
+│   └── Page_not_found.jsx # 404 page
+├── Config/
+│   ├── MainNavigation.js  # Route definitions & auth guard
+│   └── Navigation.js      # Navigation helper
+├── Image/                 # Static image assets
+├── App.js                 # App root
+└── index.js               # Entry point
+```
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v16 or higher
+- npm v8 or higher
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/aeiyannn/Task_Management_forntend.git
+cd Task_Management_forntend
+
+# Install dependencies
+npm install
+```
+
+### Running the App
+
+```bash
+npm start
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+The optimized production build is output to the `build/` folder.
+
+### Running Tests
+
+```bash
+npm test
+```
+
+## Backend
+
+This frontend connects to a hosted REST API:
+
+```
+https://taskbackend-seven.vercel.app/api
+```
+
+Key endpoints used:
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/auth/login` | User login |
+| `POST` | `/auth/signup` | User registration |
+| `GET` | `/getallusers` | Fetch all users (admin) |
+| `POST` | `/addtask/:userId` | Create and assign a task |
+| `GET` | `/mytask/:userId` | Get tasks assigned to a user |
+| `PUT` | `/updatestatus/:taskId` | Update task status |
+
+## User Roles
+
+| Role | Permissions |
+|---|---|
+| `admin` | Create tasks, assign tasks, view all tasks |
+| `manager` | View and update status of assigned tasks |
+| `user` | View and update status of assigned tasks |
 
 ## Available Scripts
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Script | Description |
+|---|---|
+| `npm start` | Run the app in development mode |
+| `npm test` | Launch the test runner in watch mode |
+| `npm run build` | Build the app for production |
+| `npm run eject` | Eject from Create React App (irreversible) |
